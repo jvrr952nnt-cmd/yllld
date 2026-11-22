@@ -1,0 +1,82 @@
+name: update-stats
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/stats.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout gh-pages
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+
+      - name: Fetch bilibili stats
+        run: |
+          python3 - <<'PY'
+          import json, os, time, datetime, urllib.request
+
+          BV = ["BV1eUxE6kEiQ","BV12doZBJE8k","BV1nSDkB2ESU","BV1SFJU6KEq4",
+                "BV1FXoLBpEZ8","BV1Uvyvz3EvQ","BV1fqpu6EE6j","BV114s26qEvJ"]
+
+          items = {}
+          if os.path.exists("stats.json"):
+              try:
+                  items = json.load(open("stats.json", encoding="utf-8")).get("items", {})
+              except Exception:
+                  items = {}
+
+          ok = 0
+          for bv in BV:
+              try:
+                  req = urllib.request.Request(
+                      "https://api.bilibili.com/x/web-interface/view?bvid=" + bv,
+                      headers={
+                          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36",
+                          "Referer": "https://space.bilibili.com/3546720686312292",
+                          "Accept": "application/json, text/plain, */*",
+                      },
+                  )
+                  with urllib.request.urlopen(req, timeout=20) as r:
+                      d = json.loads(r.read().decode("utf-8"))
+                  if d.get("code") == 0:
+                      s = d["data"]["stat"]
+                      items[bv] = {
+                          "view": s["view"],
+                          "like": s["like"],
+                          "danmaku": s["danmaku"],
+                          "title": d["data"]["title"],
+                      }
+                      ok += 1
+                  else:
+                      print("code", d.get("code"), bv)
+              except Exception as e:
+                  print("fail", bv, e)
+              time.sleep(1)
+
+          data = {"updated": datetime.datetime.utcnow().replace(microsecond=0).isoformat() + "Z", "items": items}
+          with open("stats.json", "w", encoding="utf-8") as f:
+              json.dump(data, f, ensure_ascii=False, indent=1)
+          print("updated", ok, "of", len(BV))
+          PY
+
+      - name: Commit
+        run: |
+          git config user.name "stats-bot"
+          git config user.email "stats-bot@users.noreply.github.com"
+          git add stats.json
+          if git diff --quiet --cached; then
+            echo "no change"
+          else
+            git commit -m "chore: update bilibili stats"
+            git push
+          fi
