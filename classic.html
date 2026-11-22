@@ -8,58 +8,41 @@
 <title>经典作品 · YLLLD_</title>
 <meta name="description" content="YLLLD_ 播放量最高的视频合集，播放量每 30 分钟自动同步，可在线观看。" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23FB7299'/%3E%3Cpath d='M22 18l24 14-24 14z' fill='%23fff'/%3E%3C/svg%3E" />
-
 <meta property="og:type" content="website" />
 <meta property="og:title" content="经典作品 · YLLLD_" />
 <meta property="og:description" content="按 B 站播放量排序的代表作，支持在线观看。" />
 <meta property="og:url" content="https://jvrr952nnt-cmd.github.io/yllld/classic.html" />
 <meta property="og:image" content="https://wsrv.nl/?url=i1.hdslb.com/bfs/archive/41df82dc8bbb6100f68876208b87dc69d9168a60.jpg&amp;w=1200&amp;h=630&amp;fit=cover&amp;output=jpg" />
 <meta name="twitter:card" content="summary_large_image" />
-
 <script>
 try { if (localStorage.getItem('yllld-theme') === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (e) {}
 </script>
 <style>
  :root{
-  --ink:#111318;
-  --sub:#8b8f9a;
-  --line:rgba(17,19,24,.06);
-  --card:#ffffff;
-  --bg:#f5f5f7;
+  --ink:#111318; --sub:#8b8f9a; --line:rgba(17,19,24,.06); --card:#ffffff; --bg:#f5f5f7;
   --glow:radial-gradient(1200px 600px at 50% -10%, #ffffff 0%, rgba(255,255,255,0) 60%);
   --shadow:0 1px 2px rgba(17,19,24,.04), 0 12px 24px -18px rgba(17,19,24,.35);
   --shadow-h:0 2px 4px rgba(17,19,24,.05), 0 18px 32px -18px rgba(17,19,24,.45);
   --play:#FB7299;
  }
  [data-theme="dark"]{
-  --ink:#f3f4f6;
-  --sub:#9aa0ab;
-  --line:rgba(255,255,255,.07);
-  --card:#181a1f;
-  --bg:#0a0b0e;
+  --ink:#f3f4f6; --sub:#9aa0ab; --line:rgba(255,255,255,.07); --card:#181a1f; --bg:#0a0b0e;
   --glow:radial-gradient(1200px 600px at 50% -10%, rgba(255,255,255,.07) 0%, rgba(255,255,255,0) 62%);
   --shadow:0 1px 2px rgba(0,0,0,.5), 0 16px 30px -22px rgba(0,0,0,.95);
   --shadow-h:0 2px 6px rgba(0,0,0,.55), 0 20px 36px -20px rgba(0,0,0,1);
  }
  *{box-sizing:border-box}
  body{
-  margin:0;min-height:100vh;
-  background:var(--glow), var(--bg);
-  color:var(--ink);
+  margin:0;min-height:100vh;background:var(--glow), var(--bg);color:var(--ink);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
-  -webkit-font-smoothing:antialiased;
-  padding:76px 20px 64px;
-  display:flex;justify-content:center;
+  -webkit-font-smoothing:antialiased;padding:76px 20px 64px;display:flex;justify-content:center;
  }
  .wrap{width:100%;max-width:880px;animation:rise .7s cubic-bezier(.22,.61,.36,1) both}
  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-
  .theme-btn{
-  position:fixed;top:18px;left:18px;z-index:9;
-  width:42px;height:42px;border-radius:50%;border:1px solid var(--line);
-  background:var(--card);color:var(--ink);cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:var(--shadow);
+  position:fixed;top:18px;left:18px;z-index:9;width:42px;height:42px;border-radius:50%;
+  border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);
   transition:transform .25s cubic-bezier(.22,.61,.36,1), background-color .25s;
  }
  .theme-btn:active{transform:scale(.94)}
@@ -67,7 +50,6 @@ try { if (localStorage.getItem('yllld-theme') === 'dark') document.documentEleme
  .theme-btn .moon{display:none}
  [data-theme="dark"] .theme-btn .moon{display:block}
  [data-theme="dark"] .theme-btn .sun{display:none}
-
  .top{display:flex;align-items:center;gap:10px;margin-bottom:22px}
  .back{
   width:36px;height:36px;flex:0 0 36px;border-radius:50%;border:1px solid var(--line);
@@ -78,69 +60,50 @@ try { if (localStorage.getItem('yllld-theme') === 'dark') document.documentEleme
  .back svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round}
  .top h1{font-size:21px;font-weight:650;margin:0;letter-spacing:.01em}
  .top .sub{font-size:12px;color:var(--sub);margin-left:auto;letter-spacing:.02em;text-align:right}
-
  .grid{display:grid;grid-template-columns:1fr;gap:14px}
  @media (min-width:700px){ .grid{grid-template-columns:1fr 1fr} }
-
  .card{
-  background:var(--card);border:1px solid var(--line);border-radius:20px;
-  overflow:hidden;box-shadow:var(--shadow);
-  transition:transform .28s cubic-bezier(.22,.61,.36,1), box-shadow .28s;
+  background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;
+  box-shadow:var(--shadow);transition:transform .28s cubic-bezier(.22,.61,.36,1), box-shadow .28s;
  }
  .card:hover{transform:translateY(-2px);box-shadow:var(--shadow-h)}
  .card.playing{grid-column:1 / -1}
  .card.playing:hover{transform:none}
-
  .stage{position:relative;width:100%;aspect-ratio:16/9;background:#0d0f13;cursor:pointer;overflow:hidden}
  .stage img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.22,.61,.36,1)}
  .stage:hover img{transform:scale(1.03)}
- .stage .veil{
-  position:absolute;inset:0;
-  background:linear-gradient(to top, rgba(0,0,0,.52) 0%, rgba(0,0,0,.12) 46%, rgba(0,0,0,.16) 100%);
- }
- .loading{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  color:#8b929c;font-size:12px;letter-spacing:.04em;
- }
+ .stage .veil{position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.52) 0%, rgba(0,0,0,.12) 46%, rgba(0,0,0,.16) 100%)}
+ .loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#8b929c;font-size:12px;letter-spacing:.04em}
  .stage .pbtn{
   position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-  width:52px;height:52px;border-radius:50%;
-  background:rgba(255,255,255,.92);backdrop-filter:blur(6px);
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 8px 24px rgba(0,0,0,.28);
+  width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.28);
   transition:transform .3s cubic-bezier(.22,.61,.36,1);
  }
  .stage:hover .pbtn{transform:translate(-50%,-50%) scale(1.06)}
  .pbtn svg{width:18px;height:18px;fill:#111318;stroke:none;margin-left:2px}
  .badge{
-  position:absolute;left:10px;bottom:10px;
-  font-size:11px;color:#fff;letter-spacing:.03em;
-  background:rgba(0,0,0,.42);backdrop-filter:blur(6px);
-  padding:3px 9px;border-radius:999px;
+  position:absolute;left:10px;bottom:10px;font-size:11px;color:#fff;letter-spacing:.03em;
+  background:rgba(0,0,0,.42);backdrop-filter:blur(6px);padding:3px 9px;border-radius:999px;
  }
  .rank{
-  position:absolute;right:10px;top:10px;
-  font-size:11px;color:#fff;background:rgba(0,0,0,.42);backdrop-filter:blur(6px);
-  padding:3px 9px;border-radius:999px;letter-spacing:.04em;
+  position:absolute;right:10px;top:10px;font-size:11px;color:#fff;background:rgba(0,0,0,.42);
+  backdrop-filter:blur(6px);padding:3px 9px;border-radius:999px;letter-spacing:.04em;
  }
  .close{
-  position:absolute;right:10px;top:10px;z-index:6;
-  width:32px;height:32px;border-radius:50%;border:0;cursor:pointer;
-  background:rgba(0,0,0,.55);color:#fff;font-size:16px;line-height:1;
-  display:flex;align-items:center;justify-content:center;
-  backdrop-filter:blur(6px);
+  position:absolute;right:10px;top:10px;z-index:6;width:32px;height:32px;border-radius:50%;border:0;
+  cursor:pointer;background:rgba(0,0,0,.55);color:#fff;font-size:16px;line-height:1;
+  display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px);
  }
  .close:hover{background:rgba(0,0,0,.72)}
-
  .meta{padding:13px 15px 14px}
  .meta h2{font-size:14.5px;font-weight:600;line-height:1.45;margin:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
  .stats{margin:7px 0 0;font-size:11.5px;color:var(--sub);letter-spacing:.02em;display:flex;gap:10px;flex-wrap:wrap}
  .acts{display:flex;align-items:center;gap:8px;margin-top:12px}
  .btn{
-  font-size:12.5px;text-decoration:none;border-radius:11px;padding:7px 13px;
-  border:1px solid var(--line);cursor:pointer;display:inline-flex;align-items:center;gap:6px;
-  transition:background-color .2s, border-color .2s, transform .2s;
-  font-family:inherit;
+  font-size:12.5px;text-decoration:none;border-radius:11px;padding:7px 13px;border:1px solid var(--line);
+  cursor:pointer;display:inline-flex;align-items:center;gap:6px;
+  transition:background-color .2s, border-color .2s, transform .2s;font-family:inherit;
  }
  .btn.play{background:var(--play);border-color:transparent;color:#fff;font-weight:600;box-shadow:0 8px 18px -12px rgba(251,114,153,.9)}
  .btn.play:hover{transform:translateY(-1px)}
@@ -148,7 +111,6 @@ try { if (localStorage.getItem('yllld-theme') === 'dark') document.documentEleme
  .btn.ghost:hover{border-color:rgba(120,130,150,.3);background:rgba(120,130,150,.06)}
  .btn svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.8}
  footer{text-align:center;color:var(--sub);opacity:.65;font-size:11.5px;margin-top:30px}
-
  ::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
  ::view-transition-old(root){z-index:1}
  ::view-transition-new(root){z-index:2}
@@ -167,7 +129,6 @@ try { if (localStorage.getItem('yllld-theme') === 'dark') document.documentEleme
   <h1>经典作品</h1>
   <span class="sub" id="subline">按播放量排序</span>
  </div>
-
  <div class="grid" id="grid"></div>
  <footer>© 2026 YLLLD_ · 视频版权归 YLLLD_ 所有</footer>
 </div>
@@ -183,7 +144,6 @@ try { if (localStorage.getItem('yllld-theme') === 'dark') document.documentEleme
   {bv:'BV1fqpu6EE6j', title:'[SY_Wheat on YouTube] 非人类的稳定 telly', play:1466, dur:'03:22', date:'10月10日', cover:'07efdbb4fefe1389b47cf568ac4681915c816550'},
   {bv:'BV114s26qEvJ', title:'8分钟solo全局材质包分享', play:1013, dur:'08:09', date:'11月18日', cover:'6e20754ff7078c5efd3de3ff464094b72da74223'}
  ];
-
  var host = 'https://www.bilibili.com/video/';
  var CDN = 'https://i1.hdslb.com/bfs/archive/';
  var fmt = function(n){ n = Number(n)||0; return n >= 10000 ? (n/10000).toFixed(1) + ' 万' : String(n); };
@@ -197,8 +157,7 @@ try { if (localStorage.getItem('yllld-theme') === 'dark') document.documentEleme
   var proxied = 'https://wsrv.nl/?url=i1.hdslb.com/bfs/archive/' + v.cover + '.jpg&w=640&fit=cover&output=jpg';
   card.innerHTML =
    '<div class="stage">' +
-     '<img src="' + direct + '" alt="" referrerpolicy="no-referrer" loading="lazy" ' +
-       'onerror="this.onerror=null;this.src=\'' + proxied + '\'" />' +
+     '<img src="' + direct + '" alt="" referrerpolicy="no-referrer" loading="lazy" onerror="this.onerror=null;this.src=\'' + proxied + '\'" />' +
      '<div class="veil"></div>' +
      '<div class="pbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>' +
      '<span class="badge">' + v.dur + '</span>' +
@@ -242,15 +201,17 @@ try { if (localStorage.getItem('yllld-theme') === 'dark') document.documentEleme
   btn.addEventListener('click', open);
  });
 
- /* ---- 播放量：读取自动任务生成的 stats.json（同源，不依赖第三方代理） ---- */
+ /* 播放量：读取自动任务生成的 stats.json（同源，不依赖第三方代理），并按播放量重排 */
  (function(){
   var subline = document.getElementById('subline');
+  var VIEW = {};
   var pad = function(n){ return (n<10?'0':'') + n; };
 
   function apply(bv, item){
    var card = document.querySelector('.card[data-bv="' + bv + '"]');
    if (!card || !item) return false;
    if (item.view) {
+    VIEW[bv] = item.view;
     var st = card.querySelector('[data-k="play"]');
     if (st) st.textContent = fmt(item.view) + ' 播放';
    }
@@ -261,11 +222,22 @@ try { if (localStorage.getItem('yllld-theme') === 'dark') document.documentEleme
    return true;
   }
 
+  function resort(){
+   var cards = [].slice.call(grid.children);
+   cards.sort(function(a, b){ return (VIEW[b.dataset.bv] || 0) - (VIEW[a.dataset.bv] || 0); });
+   cards.forEach(function(c, i){
+    grid.appendChild(c);
+    var rk = c.querySelector('.rank');
+    if (rk) rk.textContent = 'No.' + (i + 1);
+   });
+  }
+
   fetch('stats.json?t=' + Date.now(), {cache:'no-store'})
    .then(function(r){ return r.ok ? r.json() : null; })
    .then(function(j){
     if (!j || !j.items) { subline.textContent = '按播放量排序 · 快照数据'; return; }
     Object.keys(j.items).forEach(function(bv){ apply(bv, j.items[bv]); });
+    resort();
     if (j.updated) {
      var d = new Date(j.updated);
      subline.textContent = '按播放量排序 · 更新于 ' +
