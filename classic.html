@@ -6,7 +6,16 @@
 <meta name="color-scheme" content="light dark" />
 <meta name="theme-color" content="#f5f5f7" />
 <title>经典作品 · YLLLD_</title>
-<meta name="description" content="YLLLD_ 播放量最高的视频合集，可在线观看。" />
+<meta name="description" content="YLLLD_ 播放量最高的视频合集，播放量每 30 分钟自动同步，可在线观看。" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23FB7299'/%3E%3Cpath d='M22 18l24 14-24 14z' fill='%23fff'/%3E%3C/svg%3E" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="经典作品 · YLLLD_" />
+<meta property="og:description" content="按 B 站播放量排序的代表作，支持在线观看。" />
+<meta property="og:url" content="https://jvrr952nnt-cmd.github.io/yllld/classic.html" />
+<meta property="og:image" content="https://wsrv.nl/?url=i1.hdslb.com/bfs/archive/41df82dc8bbb6100f68876208b87dc69d9168a60.jpg&amp;w=1200&amp;h=630&amp;fit=cover&amp;output=jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+
 <script>
 try { if (localStorage.getItem('yllld-theme') === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (e) {}
 </script>
@@ -68,7 +77,7 @@ try { if (localStorage.getItem('yllld-theme') === 'dark') document.documentEleme
  .back:hover{transform:translateX(-2px)}
  .back svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round}
  .top h1{font-size:21px;font-weight:650;margin:0;letter-spacing:.01em}
- .top .sub{font-size:12px;color:var(--sub);margin-left:auto;letter-spacing:.02em}
+ .top .sub{font-size:12px;color:var(--sub);margin-left:auto;letter-spacing:.02em;text-align:right}
 
  .grid{display:grid;grid-template-columns:1fr;gap:14px}
  @media (min-width:700px){ .grid{grid-template-columns:1fr 1fr} }
@@ -80,8 +89,9 @@ try { if (localStorage.getItem('yllld-theme') === 'dark') document.documentEleme
  }
  .card:hover{transform:translateY(-2px);box-shadow:var(--shadow-h)}
  .card.playing{grid-column:1 / -1}
+ .card.playing:hover{transform:none}
 
- .stage{position:relative;width:100%;aspect-ratio:16/9;background:#000;cursor:pointer;overflow:hidden}
+ .stage{position:relative;width:100%;aspect-ratio:16/9;background:#0d0f13;cursor:pointer;overflow:hidden}
  .stage img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.22,.61,.36,1)}
  .stage:hover img{transform:scale(1.03)}
  .stage .veil{
@@ -113,6 +123,14 @@ try { if (localStorage.getItem('yllld-theme') === 'dark') document.documentEleme
   font-size:11px;color:#fff;background:rgba(0,0,0,.42);backdrop-filter:blur(6px);
   padding:3px 9px;border-radius:999px;letter-spacing:.04em;
  }
+ .close{
+  position:absolute;right:10px;top:10px;z-index:6;
+  width:32px;height:32px;border-radius:50%;border:0;cursor:pointer;
+  background:rgba(0,0,0,.55);color:#fff;font-size:16px;line-height:1;
+  display:flex;align-items:center;justify-content:center;
+  backdrop-filter:blur(6px);
+ }
+ .close:hover{background:rgba(0,0,0,.72)}
 
  .meta{padding:13px 15px 14px}
  .meta h2{font-size:14.5px;font-weight:600;line-height:1.45;margin:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
@@ -138,7 +156,7 @@ try { if (localStorage.getItem('yllld-theme') === 'dark') document.documentEleme
 </style>
 </head>
 <body>
-<button class="theme-btn" id="themeBtn" aria-label="切换深色模式" title="切换深色模式">
+<button class="theme-btn" id="themeBtn" aria-label="切换深色模式" title="切换深色模式" aria-pressed="false">
   <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6L17 7M7 17l-1.4 1.4"/></svg>
   <svg class="moon" viewBox="0 0 24 24"><path d="M20 14.4A8.4 8.4 0 0 1 9.6 4a8.6 8.6 0 1 0 10.4 10.4Z"/></svg>
 </button>
@@ -147,7 +165,7 @@ try { if (localStorage.getItem('yllld-theme') === 'dark') document.documentEleme
  <div class="top">
   <a class="back" href="index.html" aria-label="返回主页"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></a>
   <h1>经典作品</h1>
-  <span class="sub">按播放量排序</span>
+  <span class="sub" id="subline">按播放量排序</span>
  </div>
 
  <div class="grid" id="grid"></div>
@@ -156,26 +174,31 @@ try { if (localStorage.getItem('yllld-theme') === 'dark') document.documentEleme
 
 <script>
  var VIDEOS = [
-  {bv:'BV1eUxE6kEiQ', title:'此视频…致敬龙腾猫跃', play:'7098', dur:'04:05', date:'11月1日', cover:'41df82dc8bbb6100f68876208b87dc69d9168a60'},
-  {bv:'BV12doZBJE8k', title:'爱是一场伟大的冒险', play:'6396', dur:'01:57', date:'4月26日', cover:'a84c42af6707f75fb3f8696757be525ecf31177c'},
-  {bv:'BV1nSDkB2ESU', title:'当你不知道作文怎么写时，不妨看看影视飓风', play:'5021', dur:'00:28', date:'4月11日', cover:'55cc1d8c98fb7743899f5022d09a927120fafe0f'},
-  {bv:'BV1SFJU6KEq4', title:'和solo双排并取得3连胜', play:'2448', dur:'25:54', date:'10月16日', cover:'03e7cad21601155a24a5717af4f64c42953c92a9'},
-  {bv:'BV1FXoLBpEZ8', title:'什么是影视飓风？「无限进步！」', play:'1877', dur:'06:11', date:'4月24日', cover:'808f159eb57a43251f748a8ee399b64358b17027'},
-  {bv:'BV1Uvyvz3EvQ', title:'那些电影史上无法超越的经典片段重制版', play:'1612', dur:'03:54', date:'11月22日', cover:'3dfe299f6694e41eb591a9aef7fd644ac91bd9b0'},
-  {bv:'BV1fqpu6EE6j', title:'[SY_Wheat on YouTube] 非人类的稳定 telly', play:'1466', dur:'03:22', date:'10月10日', cover:'07efdbb4fefe1389b47cf568ac4681915c816550'},
-  {bv:'BV114s26qEvJ', title:'8分钟solo全局材质包分享', play:'1013', dur:'08:09', date:'11月18日', cover:'6e20754ff7078c5efd3de3ff464094b72da74223'}
+  {bv:'BV1eUxE6kEiQ', title:'此视频…致敬龙腾猫跃', play:7098, dur:'04:05', date:'11月1日', cover:'41df82dc8bbb6100f68876208b87dc69d9168a60'},
+  {bv:'BV12doZBJE8k', title:'爱是一场伟大的冒险', play:6396, dur:'01:57', date:'4月26日', cover:'a84c42af6707f75fb3f8696757be525ecf31177c'},
+  {bv:'BV1nSDkB2ESU', title:'当你不知道作文怎么写时，不妨看看影视飓风', play:5021, dur:'00:28', date:'4月11日', cover:'55cc1d8c98fb7743899f5022d09a927120fafe0f'},
+  {bv:'BV1SFJU6KEq4', title:'和solo双排并取得3连胜', play:2448, dur:'25:54', date:'10月16日', cover:'03e7cad21601155a24a5717af4f64c42953c92a9'},
+  {bv:'BV1FXoLBpEZ8', title:'什么是影视飓风？「无限进步！」', play:1877, dur:'06:11', date:'4月24日', cover:'808f159eb57a43251f748a8ee399b64358b17027'},
+  {bv:'BV1Uvyvz3EvQ', title:'那些电影史上无法超越的经典片段重制版', play:1612, dur:'03:54', date:'11月22日', cover:'3dfe299f6694e41eb591a9aef7fd644ac91bd9b0'},
+  {bv:'BV1fqpu6EE6j', title:'[SY_Wheat on YouTube] 非人类的稳定 telly', play:1466, dur:'03:22', date:'10月10日', cover:'07efdbb4fefe1389b47cf568ac4681915c816550'},
+  {bv:'BV114s26qEvJ', title:'8分钟solo全局材质包分享', play:1013, dur:'08:09', date:'11月18日', cover:'6e20754ff7078c5efd3de3ff464094b72da74223'}
  ];
- var fmt = function(n){ return Number(n) >= 10000 ? (Number(n)/10000).toFixed(1) + ' 万' : n; };
+
  var host = 'https://www.bilibili.com/video/';
+ var CDN = 'https://i1.hdslb.com/bfs/archive/';
+ var fmt = function(n){ n = Number(n)||0; return n >= 10000 ? (n/10000).toFixed(1) + ' 万' : String(n); };
 
  var grid = document.getElementById('grid');
  VIDEOS.forEach(function(v, i){
   var card = document.createElement('article');
   card.className = 'card';
-  var cover = 'https://wsrv.nl/?url=i1.hdslb.com/bfs/archive/' + v.cover + '.jpg&w=640&fit=cover&output=jpg';
+  card.dataset.bv = v.bv;
+  var direct = CDN + v.cover + '.jpg';
+  var proxied = 'https://wsrv.nl/?url=i1.hdslb.com/bfs/archive/' + v.cover + '.jpg&w=640&fit=cover&output=jpg';
   card.innerHTML =
    '<div class="stage">' +
-     '<img src="' + cover + '" alt="" referrerpolicy="no-referrer" loading="lazy" />' +
+     '<img src="' + direct + '" alt="" referrerpolicy="no-referrer" loading="lazy" ' +
+       'onerror="this.onerror=null;this.src=\'' + proxied + '\'" />' +
      '<div class="veil"></div>' +
      '<div class="pbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>' +
      '<span class="badge">' + v.dur + '</span>' +
@@ -183,10 +206,10 @@ try { if (localStorage.getItem('yllld-theme') === 'dark') document.documentEleme
    '</div>' +
    '<div class="meta">' +
      '<h2>' + v.title + '</h2>' +
-     '<div class="stats"><span>' + fmt(v.play) + ' 播放</span><span>' + v.date + '</span><span>' + v.bv + '</span></div>' +
+     '<div class="stats"><span data-k="play">' + fmt(v.play) + ' 播放</span><span>' + v.date + '</span><span>' + v.bv + '</span></div>' +
      '<div class="acts">' +
        '<button class="btn play" type="button">在线观看</button>' +
-       '<a class="btn ghost" href="' + host + v.bv + '" target="_blank" rel="noopener">原视频' +
+       '<a class="btn ghost" href="' + host + v.bv + '" target="_blank" rel="noopener">在 B 站看' +
          '<svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></a>' +
      '</div>' +
    '</div>';
@@ -194,20 +217,65 @@ try { if (localStorage.getItem('yllld-theme') === 'dark') document.documentEleme
 
   var stage = card.querySelector('.stage');
   var btn = card.querySelector('.btn.play');
+  var coverHTML = stage.innerHTML;
+
   var open = function(){
    if (card.classList.contains('playing')) return;
    card.classList.add('playing');
    stage.innerHTML = '<div class="loading">正在加载播放器…</div><iframe src="https://player.bilibili.com/player.html?bvid=' + v.bv +
-     '&page=1&high_quality=1&danmaku=1&autoplay=1" onload="var l=this.parentNode.querySelector(\'.loading\');if(l)l.remove()" scrolling="no" frameborder="0" ' +
+     '&page=1&high_quality=1&danmaku=0&autoplay=1" onload="var l=this.parentNode.querySelector(\'.loading\');if(l)l.remove()" scrolling="no" frameborder="0" ' +
      'allowfullscreen="true" allow="autoplay; fullscreen; picture-in-picture" ' +
-     'style="position:absolute;inset:0;width:100%;height:100%;border:0;background:#000"></iframe>';
+     'style="position:absolute;inset:0;width:100%;height:100%;border:0;background:#000"></iframe>' +
+     '<button class="close" type="button" aria-label="收起">✕</button>';
    stage.style.cursor = 'default';
    btn.textContent = '播放中';
    card.scrollIntoView({behavior:'smooth', block:'center'});
+   stage.querySelector('.close').addEventListener('click', function(ev){
+    ev.stopPropagation();
+    card.classList.remove('playing');
+    stage.innerHTML = coverHTML;
+    stage.style.cursor = 'pointer';
+    btn.textContent = '在线观看';
+   });
   };
   stage.addEventListener('click', open);
   btn.addEventListener('click', open);
  });
+
+ /* ---- 播放量：读取自动任务生成的 stats.json（同源，不依赖第三方代理） ---- */
+ (function(){
+  var subline = document.getElementById('subline');
+  var pad = function(n){ return (n<10?'0':'') + n; };
+
+  function apply(bv, item){
+   var card = document.querySelector('.card[data-bv="' + bv + '"]');
+   if (!card || !item) return false;
+   if (item.view) {
+    var st = card.querySelector('[data-k="play"]');
+    if (st) st.textContent = fmt(item.view) + ' 播放';
+   }
+   if (item.title) {
+    var h2 = card.querySelector('h2');
+    if (h2) h2.textContent = item.title;
+   }
+   return true;
+  }
+
+  fetch('stats.json?t=' + Date.now(), {cache:'no-store'})
+   .then(function(r){ return r.ok ? r.json() : null; })
+   .then(function(j){
+    if (!j || !j.items) { subline.textContent = '按播放量排序 · 快照数据'; return; }
+    Object.keys(j.items).forEach(function(bv){ apply(bv, j.items[bv]); });
+    if (j.updated) {
+     var d = new Date(j.updated);
+     subline.textContent = '按播放量排序 · 更新于 ' +
+       (d.getMonth() + 1) + '-' + d.getDate() + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes());
+    } else {
+     subline.textContent = '按播放量排序 · 数据已同步';
+    }
+   })
+   .catch(function(){ subline.textContent = '按播放量排序 · 快照数据'; });
+ })();
 </script>
 
 <script>
@@ -217,9 +285,11 @@ try { if (localStorage.getItem('yllld-theme') === 'dark') document.documentEleme
   var setTheme = function(next){
    root.dataset.theme = next;
    try { localStorage.setItem('yllld-theme', next); } catch (e) {}
+   btn.setAttribute('aria-pressed', next === 'dark' ? 'true' : 'false');
    var meta = document.querySelector('meta[name="theme-color"]');
    if (meta) meta.setAttribute('content', next === 'dark' ? '#0a0b0e' : '#f5f5f7');
   };
+  btn.setAttribute('aria-pressed', root.dataset.theme === 'dark' ? 'true' : 'false');
   btn.addEventListener('click', function(){
    var next = root.dataset.theme === 'dark' ? 'light' : 'dark';
    if (!document.startViewTransition) { setTheme(next); return; }
